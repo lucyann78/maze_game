@@ -1,73 +1,68 @@
 import pygame
-from src.player import Player # Necesitamos el objeto Player para interactuar con él
-from src.map import GameMap # Necesitamos el objeto GameMap para las colisiones
+from src.player import Player
+from src.map import GameMap
 
 # Diccionario global para rastrear el estado de las teclas presionadas.
-# Esto es esencial para el manejo de "multitarea" (Tarea 9),
-# permitiendo al jugador mover y rotar simultáneamente.
+# Las claves deben ser los valores numéricos (o las constantes de Pygame) que event.key devuelve.
 _keys_pressed = {
-    pygame.K_w: False,     # Tecla W: Adelante
-    pygame.K_s: False,     # Tecla S: Atrás
-    pygame.K_a: False,     # Tecla A: Strafe Izquierda
-    pygame.K_d: False,     # Tecla D: Strafe Derecha
-    pygame.K_LEFT: False,  # Flecha izquierda: Rotar izquierda
-    pygame.K_RIGHT: False, # Flecha derecha: Rotar derecha
-    pygame.K_m: False,     # Tecla M: Para activar/desactivar el minimapa (Tarea 6)
-    # Agrega más teclas aquí a medida que implementes nuevas funcionalidades (disparar, lluvia, etc.)
+    pygame.K_w: False,
+    pygame.K_s: False,
+    pygame.K_a: False,
+    pygame.K_d: False,
+    pygame.K_LEFT: False,
+    pygame.K_RIGHT: False,
+    pygame.K_m: False,
 }
 
-_minimap_enabled = False # Variable global para controlar el estado del minimapa (inicialmente desactivado).
+_minimap_enabled = False
 
 def handle_input_events(player_instance):
     """
-    Maneja todos los eventos de Pygame (cerrar ventana, presionar/soltar teclas).
-    Actualiza el estado global de las teclas.
-    Devuelve True si el evento `pygame.QUIT` (cerrar ventana) ha ocurrido,
-    indicando que el bucle principal del juego debe terminar.
+    Maneja todos los eventos de Pygame y actualiza el estado global de las teclas.
     """
-    global _minimap_enabled # Declara que vamos a modificar la variable global _minimap_enabled.
+    global _minimap_enabled
 
-    for event in pygame.event.get(): # Itera sobre todos los eventos ocurridos desde el último frame.
+    for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            return True # El usuario ha cerrado la ventana, el juego debe terminar.
-        elif event.type == pygame.KEYDOWN: # Si una tecla ha sido presionada...
-            if event.key in _keys_pressed: # Verifica si es una de nuestras teclas de movimiento/rotación.
-                _keys_pressed[event.key] = True # Marca la tecla como presionada.
-            if event.key == pygame.K_m: # Si es la tecla 'M', alterna el estado del minimapa.
+            return True
+        elif event.type == pygame.KEYDOWN:
+            # Aquí es donde se verifica si el 'valor numérico' de la tecla presionada
+            # coincide con una de las claves de nuestro diccionario.
+            # print(f"DEBUG: Tecla presionada: {event.key}") # Puedes descomentar para depuración
+
+            if event.key in _keys_pressed:
+                _keys_pressed[event.key] = True
+            if event.key == pygame.K_m:
                 _minimap_enabled = not _minimap_enabled
-        elif event.type == pygame.KEYUP: # Si una tecla ha sido soltada...
-            if event.key in _keys_pressed: # Verifica si es una de nuestras teclas de movimiento/rotación.
-                _keys_pressed[event.key] = False # Marca la tecla como no presionada.
-    return False # Si no se ha detectado el evento QUIT, el juego continúa.
+
+        elif event.type == pygame.KEYUP:
+            # print(f"DEBUG: Tecla soltada: {event.key}") # Puedes descomentar para depuración
+            if event.key in _keys_pressed:
+                _keys_pressed[event.key] = False
+    return False
 
 def update_player_movement(player, delta_time, game_map_obj):
     """
-    Actualiza la posición y rotación del jugador basándose en el estado actual de las teclas.
-    Esto permite movimientos y rotaciones simultáneos (Tarea 3: Mover, Tarea 4: ¡Ouch! (Colisión), Tarea 9: ¡Multitarea!).
+    Actualiza la posición y rotación del jugador basándose en el estado de las teclas.
     """
-    # --- Manejo del movimiento combinado (Tarea 9) ---
-
-    # Movimiento Adelante/Atrás: Solo si W está presionada y S no (o viceversa).
+    # Movimiento Adelante/Atrás
     if _keys_pressed[pygame.K_w] and not _keys_pressed[pygame.K_s]:
-        player.move(1, delta_time, game_map_obj) # Mueve hacia adelante
+        player.move(1, delta_time, game_map_obj)
     elif _keys_pressed[pygame.K_s] and not _keys_pressed[pygame.K_w]:
-        player.move(-1, delta_time, game_map_obj) # Mueve hacia atrás
+        player.move(-1, delta_time, game_map_obj)
 
-    # Movimiento Lateral (Strafe) Izquierda/Derecha: Solo si A está presionada y D no (o viceversa).
+    # Movimiento Lateral (Strafe)
     if _keys_pressed[pygame.K_a] and not _keys_pressed[pygame.K_d]:
-        player.strafe(-1, delta_time, game_map_obj) # Strafe izquierda
+        player.strafe(-1, delta_time, game_map_obj)
     elif _keys_pressed[pygame.K_d] and not _keys_pressed[pygame.K_a]:
-        player.strafe(1, delta_time, game_map_obj) # Strafe derecha
+        player.strafe(1, delta_time, game_map_obj)
 
-    # Rotación: Las flechas izquierda/derecha.
+    # Rotación
     if _keys_pressed[pygame.K_LEFT]:
-        player.rotate(-1) # Rotar a la izquierda
+        player.rotate(-1)
     if _keys_pressed[pygame.K_RIGHT]:
-        player.rotate(1) # Rotar a la derecha
+        player.rotate(1)
 
 def is_minimap_active():
-    """
-    Devuelve el estado actual de la activación/desactivación del minimapa.
-    (Tarea 6: Dibujar el mapa)
-    """
+    """Devuelve el estado actual de la activación/desactivación del minimapa."""
     return _minimap_enabled
