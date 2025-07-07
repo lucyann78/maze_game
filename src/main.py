@@ -32,7 +32,7 @@ def main_game_loop():
 
         draw_game_frame(screen, player, game_map, clock)
 
-        time.sleep(1) # Pausa temporal para depuración. Comentar/eliminar después de verificar.
+        #time.sleep(1) # Pausa temporal para depuración. Comentar/eliminar después de verificar.
 
     quit_pygame()
 
