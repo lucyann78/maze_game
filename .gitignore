@@ -1,0 +1,13 @@
+# Archivos de caché de Python
+__pycache__/
+*.pyc
+
+# Archivos de Pygame específicos si son temporales o generados
+*.bmp
+*.png
+
+# Directorio de configuración de VS Code
+.vscode/
+
+# Posibles artefactos de construcción si usas Makefile para más que solo Python
+build/
