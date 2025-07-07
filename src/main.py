@@ -12,7 +12,7 @@ from src.window import setup_game_window
 from src.map import GameMap
 from src.player import Player
 from src.draw_all_things import draw_game_frame
-from src.window_status import handle_input_events, update_player_movement
+from src.window_status import handle_input_events, update_player_movement, _keys_pressed # Importa _keys_pressed directamente aquí
 
 def main_game_loop():
     init_pygame()
@@ -28,11 +28,16 @@ def main_game_loop():
         if handle_input_events(player):
             running = False
 
+        # --- LÍNEAS DE DEPURACIÓN FUERA DEL IF ---
+        # Ahora se ejecutarán en cada frame, sin importar si hay un evento de salida.
+        print(f"Estado de teclas: {_keys_pressed}") # Imprime el diccionario en la terminal
+        # ------------------------------------------
+
         update_player_movement(player, delta_time, game_map)
 
         draw_game_frame(screen, player, game_map, clock)
 
-        #time.sleep(1) # Pausa temporal para depuración. Comentar/eliminar después de verificar.
+        # time.sleep(1) # Pausa temporal para depuración. Comentar/eliminar después de verificar.
 
     quit_pygame()
 
