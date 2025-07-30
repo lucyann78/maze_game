@@ -1,48 +1,82 @@
-# Raycaster ConectaFlores
+Raycaster ConectaFlores
+A raycasting game featuring pink and purple aesthetics, built with Pygame. Get ready for a floral adventure!
 
-Un juego de raycasting con features **rosa y violeta**, construido con **Pygame**. ¡Prepárate para una aventura floral!
+Project Overview
+This project is an implementation of a classic raycasting engine, reminiscent of Wolfenstein 3D, but with a unique and vibrant visual flair. It focuses on rendering a 3D-like maze environment and providing intuitive player controls.
 
-## Visión General del Proyecto
-Este proyecto es una implementación de un motor de raycasting clásico, al estilo de Wolfenstein 3D, pero con un toque visual único y vibrante.
+Setup and Running the Game
+Follow these steps to get Raycaster ConectaFlores up and running on your machine:
 
-## Configuración y Ejecución
-1.  **Clona el repositorio:** Si aún no lo has hecho, clona este repositorio a tu máquina.
-2.  **Navega al directorio del proyecto:** Abre tu terminal y ve a la carpeta `maze_game`.
-3.  **Instala Pygame:** Asegúrate de tener Python instalado y luego ejecuta:
-    ```bash
-    pip install pygame
-    ```
-4.  **Ejecuta el juego:**
-    ```bash
-    python src/main.py
-    ```
-    O, si hiciste el archivo `run.sh` ejecutable:
-    ```bash
-    ./run.sh
-    ```
+Clone the Repository:
+If you haven't already, clone this repository to your local machine:
 
-## Controles
-* **W / S**: Mover adelante / atrás.
-* **A / D**: Deslizarse (strafe) a la izquierda / derecha.
-* **Flechas Izquierda / Derecha**: Rotar la cámara.
-* **M**: Activar/desactivar el minimapa (¡funcionalidad por implementar!).
+Bash
 
-## Fases del Proyecto (Tareas)
-El desarrollo de este proyecto se realiza por fases, añadiendo funcionalidades de forma incremental:
-0.  ¡Paredes!
-1.  Orientación
-2.  Rotación
-3.  Mover
-4.  ¡Ouch! (Colisiones)
-5.  Parser
-6.  Dibujar el mapa
-7.  Estilo de codificación + Documentación
-8.  Texturas
-9.  ¡Multitarea!
-10. Texturas del suelo
-11. Armas
-12. Enemigos
-13. Que llueva
-14. Opción extra
+git clone [Your Repository URL Here]
+cd maze_game
+Navigate to the Project Directory:
+Open your terminal and make sure you are in the maze_game folder.
 
-¡Disfruta la exploración floral!
+Install Pygame:
+Ensure you have Python installed (Python 3.x is recommended). Then, install the Pygame library:
+
+Bash
+
+pip install pygame
+(Optional but Recommended: Consider using a virtual environment to manage dependencies: python3 -m venv venv then source venv/bin/activate before pip install pygame)
+
+Run the Game:
+Execute the main game file using Python:
+
+Bash
+
+python src/main.py
+Alternatively, if you have made your run.sh script executable:
+
+Bash
+
+./run.sh
+Controls
+W / S: Move Forward / Backward
+
+A / D: Strafe Left / Right
+
+Left Arrow / Right Arrow: Rotate Camera Left / Right
+
+M: Toggle Minimap (functionality to be implemented!)
+
+Project Phases (Tasks)
+The development of this project is structured into incremental phases, adding functionalities step-by-step:
+
+Walls! (Initial rendering of maze walls)
+
+Orientation (Player's initial facing direction)
+
+Rotation (Player camera rotation)
+
+Movement (Player's ability to move through the maze)
+
+Ouch! (Collision detection with walls)
+
+Parser (Loading map data from external sources)
+
+Draw the Map (Rendering the overall maze structure)
+
+Coding Style + Documentation (Ensuring clean code and proper explanations)
+
+Textures (Applying visual textures to walls)
+
+Multitasking! (Handling multiple game elements/processes concurrently)
+
+Floor Textures (Rendering textures on the floor)
+
+Weapons (Implementing player weaponry)
+
+Enemies (Introducing hostile entities)
+
+Let it Rain (Implementing weather effects)
+
+Extra Option (Additional features beyond core requirements)
+
+Enjoy your floral exploration!
+
